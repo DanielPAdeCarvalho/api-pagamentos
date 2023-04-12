@@ -42,11 +42,11 @@ func setupRouter() *gin.Engine {
 
 // Para compilar o binario do sistema usamos:
 //
-//	GOOS=linux GOARCH=amd64 CGO_ENABLED=0 go build -o mesas-api .
+//	GOOS=linux GOARCH=amd64 CGO_ENABLED=0 go build -o pagamentos-api .
 //
 // para criar o zip do projeto comando:
 //
-// zip lambda.zip mesas-api
+// zip lambda.zip pagamentos-api
 //
 // main.go
 func main() {
