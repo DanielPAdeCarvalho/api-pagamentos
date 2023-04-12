@@ -2,7 +2,6 @@ package models
 
 type Pagamento struct {
 	Cliente    string  `json:"cliente"`
-	Valor      string  `json:"valor"`
 	Troco      float64 `json:"troco"`
 	Credito    float64 `json:"credito"`
 	Debito     float64 `json:"debito"`

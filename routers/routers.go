@@ -19,6 +19,7 @@ func ResponseOK(c *gin.Context, log logar.Logfile) {
 // PostPagamento is a function that receives a POST request with a JSON body
 func PostPagamento(c *gin.Context, log logar.Logfile, db *dynamodb.Client) {
 	var pagamento models.Pagamento
+
 	//o codigo esta indo no observatorio nacional pegar a data e hora
 	datatemp, err := ntp.Time("gps.ntp.br")
 	logar.Check(err, log)
@@ -28,13 +29,11 @@ func PostPagamento(c *gin.Context, log logar.Logfile, db *dynamodb.Client) {
 	logar.Check(err, log)
 	pagamento.Data = datatemp.In(loc).Format("2006-01-02_15:04:05")
 
+	err = c.BindJSON(&pagamento)
+	logar.Check(err, log)
 	// Bind JSON received to new Pagamento
-	if err := c.ShouldBindJSON(&pagamento); err != nil {
-		c.IndentedJSON(http.StatusBadRequest, gin.H{"error": err.Error()})
-		return
-	}
 
 	// Insert new Pagamento into database
 	query.InsertPagamento(db, pagamento, log)
-	c.IndentedJSON(http.StatusOK, pagamento)
+	c.IndentedJSON(http.StatusOK, "pagamento inserido com sucesso")
 }

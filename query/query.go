@@ -4,6 +4,7 @@ import (
 	"api-pagamentos/logar"
 	"api-pagamentos/models"
 	"context"
+	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/feature/dynamodb/attributevalue"
@@ -18,7 +19,7 @@ func InsertPagamento(client *dynamodb.Client, Pagamento models.Pagamento, log lo
 		TableName: aws.String("Pagamentos"),
 		Item:      pagamento,
 	}
-
+	fmt.Println(pagamento)
 	_, err = client.PutItem(context.Background(), input)
 	logar.Check(err, log)
 }
