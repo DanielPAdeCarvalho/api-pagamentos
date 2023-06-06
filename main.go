@@ -18,6 +18,7 @@ var (
 	logs         logar.Logfile
 )
 
+// inLambda verifica se o binário está rodando em um ambiente lambda
 func inLambda() bool {
 	if lambdaTaskRoot := os.Getenv("LAMBDA_TASK_ROOT"); lambdaTaskRoot != "" {
 		return true
